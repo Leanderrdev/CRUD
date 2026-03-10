@@ -1,54 +1,42 @@
-const form = document.getElementById("crudForm");
-const alertBox = document.getElementById("alert");
+/* EDIT MODAL */
 
-form.addEventListener("submit", function (e) {
+const editButtons = document.querySelectorAll(".edit-btn");
+const modal = document.getElementById("editModal");
 
-    e.preventDefault();
+const idInput = document.getElementById("edit_id");
+const nameInput = document.getElementById("edit_name");
+const depInput = document.getElementById("edit_department");
+const ageInput = document.getElementById("edit_age");
 
-    showAlert("Form submitted. Connect to database to store data.");
+const closeModal = document.getElementById("closeModal");
 
-    animateButton();
+editButtons.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        modal.style.display = "flex";
+
+        idInput.value = btn.dataset.id;
+        nameInput.value = btn.dataset.name;
+        depInput.value = btn.dataset.department;
+        ageInput.value = btn.dataset.age;
+
+    });
 
 });
 
-/* ALERT MESSAGE */
+closeModal.addEventListener("click", () => {
 
-function showAlert(message) {
+    modal.style.display = "none";
 
-    alertBox.textContent = message;
-    alertBox.classList.remove("hidden");
+});
 
-    setTimeout(() => {
-        alertBox.classList.add("hidden");
-    }, 3000);
+/* CLOSE MODAL IF CLICK OUTSIDE */
 
-}
+window.addEventListener("click", (e) => {
 
-/* BUTTON ANIMATION */
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
 
-function animateButton() {
-
-    const btn = document.querySelector(".submit-btn");
-
-    btn.style.transform = "scale(0.95)";
-
-    setTimeout(() => {
-        btn.style.transform = "scale(1)";
-    }, 150);
-
-}
-
-/* TABLE ROW ANIMATION (for when you add rows dynamically later) */
-
-function addRowAnimation(row) {
-
-    row.style.opacity = "0";
-    row.style.transform = "translateY(10px)";
-
-    setTimeout(() => {
-        row.style.transition = "0.3s";
-        row.style.opacity = "1";
-        row.style.transform = "translateY(0)";
-    }, 10);
-
-}
+});

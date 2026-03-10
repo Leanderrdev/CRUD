@@ -8,9 +8,9 @@ $db = $database->connect();
 
 $student = new Student($db);
 
-/* INSERT DATA */
-
 $message = "";
+
+/* INSERT */
 
 if (isset($_POST['submit'])) {
 
@@ -23,7 +23,21 @@ if (isset($_POST['submit'])) {
     }
 }
 
-/* FETCH DATA */
+/* UPDATE */
+
+if(isset($_POST['update'])){
+
+    $student->id = $_POST['edit_id'];
+    $student->name = $_POST['edit_name'];
+    $student->department = $_POST['edit_department'];
+    $student->age = $_POST['edit_age'];
+
+    if($student->update()){
+        header("Location: index.php");
+        exit();
+    }
+
+}
 
 $result = $student->read();
 
@@ -33,6 +47,7 @@ $result = $student->read();
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -55,7 +70,6 @@ $result = $student->read();
 
 <div class="card-header">
 <h2>CRUD with PDO</h2>
-<a href="#" class="create-btn">Create New</a>
 </div>
 
 <?php if($message): ?>
@@ -64,7 +78,7 @@ $result = $student->read();
 
 <div class="content">
 
-<!-- FORM -->
+<!-- CREATE FORM -->
 <div class="form-section">
 
 <form method="POST">
@@ -84,6 +98,37 @@ $result = $student->read();
 </div>
 
 </form>
+
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal">
+
+<div class="modal-content">
+
+<h2>Edit Student</h2>
+
+<form method="POST">
+
+<input type="hidden" name="edit_id" id="edit_id">
+
+<label>Name</label>
+<input type="text" name="edit_name" id="edit_name" required>
+
+<label>Department</label>
+<input type="text" name="edit_department" id="edit_department" required>
+
+<label>Age</label>
+<input type="number" name="edit_age" id="edit_age" required>
+
+<div class="buttons">
+<button type="submit" name="update" class="submit-btn">Update</button>
+<button type="button" id="closeModal" class="clear-btn">Cancel</button>
+</div>
+
+</form>
+
+</div>
 
 </div>
 
@@ -108,14 +153,25 @@ $result = $student->read();
 
 <tr>
 
-<td><?php echo $row['id']; ?></td>
-<td><?php echo $row['name']; ?></td>
-<td><?php echo $row['department']; ?></td>
-<td><?php echo $row['age']; ?></td>
+<td><?= $row['id'] ?></td>
+<td><?= $row['name'] ?></td>
+<td><?= $row['department'] ?></td>
+<td><?= $row['age'] ?></td>
 
 <td>
-<a href="edit.php?id=<?php echo $row['id']; ?>" class="action-btn">Edit</a>
-<a href="delete.php?id=<?php echo $row['id']; ?>" class="action-btn">Delete</a>
+
+<button
+class="edit-btn action-btn"
+data-id="<?= $row['id'] ?>"
+data-name="<?= $row['name'] ?>"
+data-department="<?= $row['department'] ?>"
+data-age="<?= $row['age'] ?>"
+>
+Edit
+</button>
+
+<a href="delete.php?id=<?= $row['id'] ?>" class="action-btn">Delete</a>
+
 </td>
 
 </tr>
@@ -133,7 +189,7 @@ $result = $student->read();
 
 </main>
 
-<script src="script.js"></script>
+<script src="assets/script.js"></script>
 
 </body>
 </html>
