@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f1f3f6;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(90deg, #2f6de1, #3a7df5);
+    color: white;
+    padding: 15px 30px;
+}
+
+.logo {
+    background: white;
+    color: #2f6de1;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* MAIN */
+
+main {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* CARD */
+
+.card {
+    background: white;
+    width: 1200px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.7s ease;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-btn {
+    color: #2f6de1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* CONTENT */
+
+.content {
+    display: flex;
+    gap: 40px;
+}
+
+/* FORM */
+
+.form-section {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2f6de1;
+    box-shadow: 0 0 0 2px rgba(47, 109, 225, 0.15);
+}
+
+/* BUTTONS */
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.submit-btn {
+    background: #2f6de1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #1e4fb8;
+}
+
+.clear-btn {
+    background: #ddd;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* TABLE */
+
+.table-section {
+    flex: 1.2;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #f7f7f7;
+}
+
+tbody tr {
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background: #f3f6ff;
+}
+
+/* ACTION LINKS */
+
+.action-btn {
+    color: #2f6de1;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+/* ALERT */
+
+.alert {
+    margin-bottom: 10px;
+    color: green;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .content {
+        flex-direction: column;
+    }
+
+}
